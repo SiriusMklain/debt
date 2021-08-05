@@ -1,24 +1,20 @@
-version: "3"
-
-
+version: "3.7"
 
 services:
-  postgresdb:
-    build:
-      context: ./docker/postgres
-      dockerfile: Dockerfile
-    environment:
-      - POSTGRES_PASSWORD=admin
-    volumes:
-      - ./docker/postgres/init.sql:/docker-entrypoint-initdb.d/init.sql
+  debt_db:
+    image: postgres:10.1-alpine
     ports:
-      - "5432:5432"
-
-  web:
-    build:
-      context: ./
-      dockerfile: Dockerfile
+      - 5432:5432
     volumes:
-      - ./:/usr/src/app
+      - postgres_data:/var/lib/postgresql/data/
+  web:
+    build: .
+    command: python /usr/src/debt/manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/usr/src/debt
+    ports:
+      - 8000:8000
     depends_on:
-      - postgresdb
+      - debt_db
+volumes:
+  postgres_data:

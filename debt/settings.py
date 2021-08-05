@@ -47,7 +47,6 @@ INSTALLED_APPS = [
     'about',
     'info',
     'cms',
-    'psycopg2',
 ]
 
 MIDDLEWARE = [
@@ -88,14 +87,19 @@ WSGI_APPLICATION = 'debt.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'debt_db',
-        'USER': 'admin',
-        'PASSWORD': 'admin',
-        'HOST': 'postgresdb',
+        'NAME': 'postgres',
+        'USER': 'postgres',
+        'HOST': 'debt_db',
         'PORT': 5432
     }
 }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': 'db.sqlite3',
+#     }
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators

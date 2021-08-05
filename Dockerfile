@@ -1,13 +1,15 @@
-FROM python:3
+FROM python:3.8
 
-WORKDIR /usr/src/app
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
 
-COPY requirements.txt .
-COPY entrypoint.sh .
+WORKDIR /usr/src/debt
 
-RUN pip install -r requirements.txt
-RUN chmod +x entrypoint.sh
+COPY ./req.txt /usr/src/req.txt
+RUN pip install -r /usr/src/req.txt
 
-COPY . .
+COPY . /usr/src/debt
 
-ENTRYPOINT ["/usr/src/app/entrypoint.sh"]
+#EXPOSE 8000
+#CMD ["python", "manage.py", "migrate"]
+#CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
