@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'about',
     'info',
     'cms',
+    'psycopg2',
 ]
 
 MIDDLEWARE = [
@@ -86,8 +87,12 @@ WSGI_APPLICATION = 'debt.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'debt_db',
+        'USER': 'admin',
+        'PASSWORD': 'admin',
+        'HOST': 'postgresdb',
+        'PORT': 5432
     }
 }
 
