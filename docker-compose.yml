@@ -3,13 +3,19 @@ version: "3.7"
 services:
   debt_db:
     image: postgres:10.1-alpine
-    ports:
-      - 5432:5432
     volumes:
       - postgres_data:/var/lib/postgresql/data/
-  web:
-    build: .
-    command: python /usr/src/debt/manage.py runserver 0.0.0.0:8000
+    environment:
+      POSTGRES_PASSWORD: 123456
+      POSTGRES_USER: postgres
+      POSTGRESS_DB: postgres
+  django:
+    container_name: debitors
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    command: bash -c "python /usr/src/debt/manage.py migrate --noinput &&
+             python /usr/src/debt/manage.py runserver 0.0.0.0:8000"
     volumes:
       - .:/usr/src/debt
     ports:
