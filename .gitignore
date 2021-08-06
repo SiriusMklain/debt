@@ -3,3 +3,7 @@ venv
 templates
 db.sqlite3
 manage.py
+.env.dev
+
+__pycache__/
+*/__pycache__/

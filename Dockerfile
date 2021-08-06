@@ -1,15 +1,22 @@
-FROM python:3.8
+FROM python:3.8-alpine
+# set work directory
+WORKDIR /usr/src/app
 
+# set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
-WORKDIR /usr/src/debt
 
-COPY ./req.txt /usr/src/req.txt
-RUN pip install -r /usr/src/req.txt
+RUN python -m pip install --upgrade pip
+# install psycopg2 dependencies
+RUN apk update \
+    && apk add postgresql-dev gcc python3-dev musl-dev
 
-COPY . /usr/src/debt
+# install dependencies
+RUN apk update && apk add g++ gcc libxml2 libxslt-dev
+COPY ./req.txt .
+RUN pip install -r req.txt
 
-EXPOSE 8000
-#CMD ["python", "manage.py", "migrate"]
-#CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+
+# copy project
+COPY . .
