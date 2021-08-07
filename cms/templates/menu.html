@@ -1,0 +1,8 @@
+<ul class="navbar-nav ms-auto navbar-center" id="navbar-navlist">
+    {% for m_item in menu_items %}
+        <li class="nav-item">
+            <a href="{{ m_item.url }}" class="nav-link">{{ m_item.name }}</a>
+        </li>
+    {% endfor %}
+</ul>
+

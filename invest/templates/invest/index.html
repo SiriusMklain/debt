@@ -1,0 +1,67 @@
+{% extends 'inc/index.html' %}
+{% load static %}
+{% block title %}Инвестиции{% endblock %}
+
+{% block content %}
+
+    <!-- Pricing start -->
+    <section class="section" id="pricing">
+        <div class="container">
+            <div class="row justify-content-center mb-5">
+                <div class="col-lg-7 text-center">
+                    <h2 class="fw-bold">Pricing Plan</h2>
+                    <p class="text-muted">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium
+                        doloremque laudantium totam rem ab illo inventore.</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="text-center mb-4 pricing-tab">
+                        <ul class="nav nav-pills rounded-pill justify-content-center d-inline-block shadow-sm"
+                            id="pricingpills-tab" role="tablist">
+                            <li class="nav-item d-inline-block">
+                                <a class="nav-link rounded-pill active" href="/invest/">Актуальные проекты</a>
+                            </li>
+                            <li class="nav-item d-inline-block">
+                                <a class="nav-link rounded-pill"
+                                    href="/completion/">Завершенные проекты</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="row">
+                        {% for post in posts %}
+                            {% if post.statusProject == 'Активный' %}
+                                <div class="col-lg-4">
+                                    <div class="card plan-card mt-4 rounded text-center border-0 shadow overflow-hidden">
+                                    <div class="card-body px-4 py-5">
+                                        <span class="badge badge-primary pricing-badge shadow-lg">Активный проект</span>
+                                        <!-- <div class="icon-mono avatar-md bg-soft-primary text-primary rounded mx-auto mb-5"><i class="icon-lg" data-feather="circle"></i></div> -->
+                                        <div class="icon-mono avatar-md bg-soft-primary rounded mx-auto mb-5 p-3">
+                                            <img src="images/pricing/1.png" alt=""
+                                                class="img-fluid d-block mx-auto" />
+                                        </div>
+                                        <h4 class="text-uppercase mb-4 pb-1">{{ post.projectNumber }}</h4>
+                                        <p class="text-muted">Номинал долга: <span class="fw-bold">{{ post.amountDebts }}</span></p>
+                                        <p class="text-muted">Плановая сумма взыскания: <span class="fw-bold">{{ post.amountRecovery }}</span></p>
+                                        <p class="text-muted mb-4 pb-1">Сумма покупки: <span class="fw-bold">{{ post.amountBye }}</span></p>
+                                        <p class="text-muted font-size-14 mb-1">Ожидаемая годовая доходность<span class="fw-bold">{{ post.expectedReturn }}</span></p>
+                                        <p class="text-dark font-size-16 font-weight-semibold mb-4">Сумма инвестиций: <span class="fw-bold">{{ post.amountInvestment }}</span></p>
+                                        <a href="javascript: void(0);" class="btn btn-soft-primary">Подробнее</a>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+
+                </div>
+                <!-- end col -->
+            </div>
+            <!-- end row -->
+        </div>
+        <!-- end container -->
+    </section>
+    <!-- Pricing end -->
+
+{% endblock %}
